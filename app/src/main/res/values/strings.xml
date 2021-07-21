@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">LightningTalk</string>
+    <string name="show_toast">Show toast</string>
+    <string name="start_service">Start service</string>
+    <string name="start_intent_service">Start Intent Service</string>
+</resources>
