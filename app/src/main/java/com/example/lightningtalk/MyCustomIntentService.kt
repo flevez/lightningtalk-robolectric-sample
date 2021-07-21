@@ -7,6 +7,7 @@ import android.provider.Settings
 import android.util.Log
 
 class MyCustomIntentService : IntentService("MyCustomIntentService") {
+
     companion object {
         const val TAG = "MyCustomIntentService"
     }

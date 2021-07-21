@@ -9,15 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 class ExampleActivity : AppCompatActivity() {
 
-    private val componentNameMyCustomService = ComponentName(
-        "com.example.lightningtalk",
-        "com.example.lightningtalk.MyCustomService"
-    )
-    private val componentNameMyCustomIntentService = ComponentName(
-        "com.example.lightningtalk",
-        "com.example.lightningtalk.MyCustomIntentService"
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_example)
@@ -35,29 +26,35 @@ class ExampleActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        stopService(Intent().apply {
-            component = componentNameMyCustomService
-        })
-        stopService(Intent().apply {
-            component = componentNameMyCustomIntentService
-        })
-    }
-
     private fun startService() {
-        startService(Intent().apply {
-            component = componentNameMyCustomService
-        })
+        startService(getIntentMyCustomService())
     }
 
     private fun startIntentService() {
-        startService(Intent().apply {
-            component = componentNameMyCustomIntentService
-        })
+        startService(getIntentMyCustomIntentService())
     }
 
     private fun showToast() {
         Toast.makeText(this@ExampleActivity, "Toast!!", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onStop() {
+        stopService(getIntentMyCustomService())
+        stopService(getIntentMyCustomIntentService())
+        super.onStop()
+    }
+
+    private fun getIntentMyCustomService() = Intent().apply {
+        component = ComponentName(
+            "com.example.lightningtalk",
+            "com.example.lightningtalk.MyCustomService"
+        )
+    }
+
+    private fun getIntentMyCustomIntentService() = Intent().apply {
+        component = ComponentName(
+            "com.example.lightningtalk",
+            "com.example.lightningtalk.MyCustomIntentService"
+        )
     }
 }
