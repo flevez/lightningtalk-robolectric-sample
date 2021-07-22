@@ -84,4 +84,34 @@ class MyCustomServiceTest {
             player.start()
         }
     }
+
+    @Test
+    @Config(minSdk = Build.VERSION_CODES.O_MR1)
+    fun `Should log that it is bigger than android oreo`() {
+        Robolectric.buildService(MyCustomService::class.java).create().startCommand(0, 0)
+
+        verify {
+            Log.d("MyCustomService", "I'm bigger than Android Oreo")
+        }
+    }
+
+    @Test
+    @Config(maxSdk = Build.VERSION_CODES.N_MR1)
+    fun `Should log that it is less than android oreo`() {
+        Robolectric.buildService(MyCustomService::class.java).create().startCommand(0, 0)
+
+        verify {
+            Log.d("MyCustomService", "I'm less than Android Oreo")
+        }
+    }
+
+    @Test
+    @Config(sdk = [Build.VERSION_CODES.O])
+    fun `Should log that it is android oreo`() {
+        Robolectric.buildService(MyCustomService::class.java).create().startCommand(0, 0)
+
+        verify {
+            Log.d("MyCustomService", "I'm Android Oreo")
+        }
+    }
 }
